@@ -19,4 +19,5 @@ interface DataModule {
         @Singleton
         fun bindWeatherRepository(weatherRepositoryImpl: WeatherRepositoryImpl): WeatherRepository
     }
+
 }
