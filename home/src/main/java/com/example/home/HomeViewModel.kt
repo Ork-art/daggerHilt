@@ -7,6 +7,7 @@ import com.example.domain.usecase.AddCityUseCase
 import com.example.domain.usecase.GetCityUseCase
 import com.example.domain.usecase.GetCurrentTemperatureByCityUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,10 +18,6 @@ class HomeViewModel @Inject constructor(
     private val getCurrentTemperatureByCityUseCase: GetCurrentTemperatureByCityUseCase
 ) : BaseViewModel<HomeState, HomeEvent>() {
 
-//    private var weatherRepository= WeatherRepositoryImpl()
-//    private var weatherUseCase = GetWeatherUseCase(weatherRepository)
-
-
     fun addCityName(cityName: String) {
         viewModelScope.launch {
             addCityWeatherUseCase.invoke(cityName)
@@ -30,12 +27,14 @@ class HomeViewModel @Inject constructor(
     fun getCities(){
         viewModelScope.launch {
             val cities = getCityUseCase.invoke(Unit)
-            val weathers= cities.map{
-                getCurrentTemperatureByCityUseCase.invoke(it)
+            val weathersAsyncList= cities.map{
+                async { getCurrentTemperatureByCityUseCase.invoke(it) }
+            }
+
+            val weathers = weathersAsyncList.map {
+                it.await()
             }
             postState(HomeState.Weathers(weathers))
-
-
         }
     }
 

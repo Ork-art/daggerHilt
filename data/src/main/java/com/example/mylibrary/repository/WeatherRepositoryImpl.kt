@@ -3,6 +3,7 @@ package com.example.mylibrary.repository
 import com.example.domain.entities.City
 import com.example.domain.entities.Weather
 import com.example.domain.entities.WeatherUnits
+import com.example.domain.entities.remote.WeatherResponse
 import com.example.domain.repository.WeatherRepository
 import com.example.mylibrary.BuildConfig
 import com.example.mylibrary.database.dao.CitiesDao

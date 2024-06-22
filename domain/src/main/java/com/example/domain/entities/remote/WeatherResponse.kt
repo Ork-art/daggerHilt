@@ -26,5 +26,4 @@ data class Main(
     val pressure: Float,
     @SerializedName("humidity")
     val humidity: Float
-
 )

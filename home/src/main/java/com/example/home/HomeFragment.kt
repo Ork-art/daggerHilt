@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeState, HomeEvent>() {
 
     private val weatherList: ArrayList<WeatherModel> by lazy {
-        arrayListOf(
+       arrayListOf(
             WeatherModel(
                 "11.11°", "Humidite:", "Vent: ",
                 "Precipitation: ", "drawable/rainandsun.jpg",
@@ -56,7 +56,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeState,
         }
 
         viewModel.getCities()
-
 
     }
 
