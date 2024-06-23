@@ -9,6 +9,8 @@ import com.example.mylibrary.BuildConfig
 import com.example.mylibrary.database.dao.CitiesDao
 import com.example.mylibrary.database.entities.CityEntity
 import com.example.shareprefer.util.Api
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 
@@ -30,6 +32,14 @@ class WeatherRepositoryImpl @Inject constructor(
 
     override suspend fun getCurrentWeatherByCity(city: City): Weather {
         return api.getCurrentWeather(cityName = city.cityName, BuildConfig.ApiKey, WeatherUnits.METRIC.name).toDomain(city)
+    }
+
+    override fun getAllCitiesFlow(): Flow<List<City>> {
+        return citiesDao.getAllCitiesFlow().map {cityEntity ->
+            cityEntity.map {
+                it.toDomain()
+            }
+        }
     }
 }
 

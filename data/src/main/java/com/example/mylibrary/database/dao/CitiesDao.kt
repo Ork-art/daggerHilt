@@ -15,6 +15,9 @@ interface CitiesDao {
     @Query("select * from cities")
     suspend fun getAllCities(): List<CityEntity>
 
+    @Query("select * from cities")
+    fun getAllCitiesFlow(): Flow<List<CityEntity>>
+
     @Query("select * from cities where id == :itemId")
     fun getCityById(itemId: String): CityEntity
 

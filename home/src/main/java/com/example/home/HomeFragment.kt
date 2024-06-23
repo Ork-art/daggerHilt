@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.BaseFragment
+import com.example.domain.entities.City
 import com.example.home.databinding.FragmentHomeBinding
 import com.example.home.model.WeatherModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,6 +57,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeState,
         }
 
         viewModel.getCities()
+
+        viewModel.getCityWeather(City("weew", "jiji"))
 
     }
 
